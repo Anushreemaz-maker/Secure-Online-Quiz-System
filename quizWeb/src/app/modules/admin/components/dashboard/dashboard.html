@@ -1,0 +1,26 @@
+<div style="max-width: 800px; margin: 60px auto; font-family: Arial; text-align: center;">
+
+  <h1>Admin Dashboard</h1>
+  <p style="color: gray;">Manage your quiz tests and questions</p>
+
+  <div style="display: flex; justify-content: center; gap: 24px; margin-top: 40px;">
+
+    <!-- Create Test Card -->
+    <div style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 32px; width: 200px; cursor: pointer;"
+      (click)="goToCreateTest()">
+      <div style="font-size: 40px;">📝</div>
+      <h3>Create Test</h3>
+      <p style="color: gray; font-size: 13px;">Create a new quiz test</p>
+    </div>
+
+    <!-- Add Question Card -->
+    <div style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 32px; width: 200px; cursor: pointer;"
+      (click)="goToAddQuestion()">
+      <div style="font-size: 40px;">❓</div>
+      <h3>Add Question</h3>
+      <p style="color: gray; font-size: 13px;">Add questions to any test</p>
+    </div>
+
+  </div>
+
+</div>

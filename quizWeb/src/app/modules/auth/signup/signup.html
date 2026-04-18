@@ -1,0 +1,58 @@
+<div class="bg" style="background-color:#F8F8F8">
+  <div class="parent">
+    <div class="child">
+      <div nz-row class="imgDiv">
+        <h1 style="margin-left: 80px;">Sign Up</h1>
+      </div>
+
+      <form nz-form [formGroup]="validateForm">
+
+        <nz-form-item>
+          <nz-form-control nzHasFeedback nzErrorTip="Name is required">
+            <input nz-input placeholder="Name" formControlName="name"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control nzHasFeedback nzErrorTip="Valid email is required">
+            <input nz-input placeholder="Email" formControlName="email"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control nzHasFeedback nzErrorTip="Password is required">
+            <input nz-input type="password" placeholder="Password" formControlName="password"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Role Selection -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please select a role">
+            <nz-select formControlName="role" nzPlaceHolder="Select Role">
+              <nz-option nzValue="USER" nzLabel="User"></nz-option>
+              <nz-option nzValue="ADMIN" nzLabel="Admin"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Secret Code (only shown if Admin selected) -->
+        <nz-form-item *ngIf="validateForm.get('role')?.value === 'ADMIN'">
+          <nz-form-control nzErrorTip="Secret code is required for Admin">
+            <input nz-input type="password"
+              placeholder="Enter Admin Secret Code"
+              formControlName="secretCode"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzType="primary"
+          [nzLoading]="isLoading"
+          type="button"
+          (click)="submitForm()"
+          class="login-form-button login-form-margin">
+          Register
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

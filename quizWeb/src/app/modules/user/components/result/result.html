@@ -1,0 +1,30 @@
+<div style="max-width: 600px; margin: 60px auto; font-family: Arial; text-align: center;">
+
+  <h2>Test Completed! 🎉</h2>
+
+  <!-- Score Card -->
+  <div style="background:#f6ffed; border:1px solid #b7eb8f; border-radius:8px; padding:40px; margin:24px 0;">
+
+    <h1 style="font-size:56px; margin:0; color:#52c41a;">
+      {{ score }} / {{ total }}
+    </h1>
+    <p style="color:gray; font-size:16px;">Correct Answers</p>
+
+    <div style="font-size:32px; margin-top:16px;">
+      {{ percentage }}%
+    </div>
+
+    <div style="margin-top:16px; font-size:18px; font-weight:bold;"
+      [style.color]="percentage >= 70 ? '#52c41a' : percentage >= 40 ? '#faad14' : '#ff4d4f'">
+      {{ percentage >= 70 ? '🏆 Excellent!' : percentage >= 40 ? '👍 Good Try!' : '📚 Keep Practicing!' }}
+    </div>
+
+  </div>
+
+  <button (click)="goToDashboard()"
+    style="background:#1890ff; color:white; border:none; padding:12px 32px;
+           border-radius:4px; cursor:pointer; font-size:16px;">
+    Back to Dashboard
+  </button>
+
+</div>

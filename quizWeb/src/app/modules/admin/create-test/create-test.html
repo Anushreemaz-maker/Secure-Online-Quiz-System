@@ -1,0 +1,49 @@
+<div class="page-container">
+  <div class="form-container">
+    <form nz-form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+      <!-- Title -->
+      <nz-form-item>
+        <nz-form-label nzSpan="24">Title</nz-form-label>
+        <nz-form-control nzSpan="24">
+          <input nz-input formControlName="title" placeholder="Enter title" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- ✅ CHANGED: Total test time, not per-question -->
+      <nz-form-item>
+        <nz-form-label nzSpan="24">Total Test Time (minutes)</nz-form-label>
+        <nz-form-control nzSpan="24">
+          <input nz-input type="number" formControlName="timeLimit"
+                 placeholder="e.g. 30 for a 30-minute test" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Description -->
+      <nz-form-item>
+        <nz-form-label nzSpan="24">Description</nz-form-label>
+        <nz-form-control nzSpan="24">
+          <textarea nz-input rows="4" formControlName="description"
+                    placeholder="Description"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="submit-btn">
+        <button nz-button nzType="primary" [disabled]="testForm.invalid">
+          Submit
+        </button>
+      </div>
+
+    </form>
+
+    <div *ngIf="createdTestId" style="margin-top: 24px; text-align: center;">
+      <p style="color: green; font-weight: bold;">
+        Test created successfully! (ID: {{ createdTestId }})
+      </p>
+      <button nz-button nzType="default" (click)="goToAddQuestion()">
+        Add Questions to this Test
+      </button>
+    </div>
+
+  </div>
+</div>

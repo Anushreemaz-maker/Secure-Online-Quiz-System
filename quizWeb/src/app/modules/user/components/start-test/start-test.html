@@ -1,0 +1,80 @@
+<div style="max-width: 700px; margin: 40px auto; font-family: Arial;">
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" style="text-align:center; margin-top:40px; color:gray;">
+    Loading questions...
+  </div>
+
+  <!-- No questions -->
+  <div *ngIf="!isLoading && questions.length === 0"
+    style="text-align:center; margin-top:40px; color:red;">
+    No questions found for this test!
+  </div>
+
+  <!-- Ready to Start -->
+  <div *ngIf="!isLoading && questions.length > 0 && !testStarted"
+    style="text-align:center; margin-top:60px;">
+    <h2>Ready to Start?</h2>
+    <p style="color:gray;">
+      This test has {{ questions.length }} questions.
+      <!-- ✅ Shows total test time in minutes -->
+      Total time: {{ timeLimit / 60 | number:'1.0-0' }} minutes.
+    </p>
+    <button (click)="beginTest()"
+      style="background:#1890ff; color:white; border:none; padding:12px 32px;
+             border-radius:4px; cursor:pointer; font-size:18px; margin-top:16px;">
+      Begin Test
+    </button>
+  </div>
+
+  <!-- Quiz -->
+  <div *ngIf="testStarted && currentQuestion">
+
+    <!-- Top bar: question progress + whole-test timer -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <span>Question {{ currentIndex + 1 }} of {{ questions.length }}</span>
+
+      <!-- ✅ MM:SS countdown for the whole test — turns red under 1 min -->
+      <span [style.color]="timeLeft < 60 ? 'red' : '#333'"
+            style="font-weight:bold; font-size:18px;">
+        {{ formattedTime }}
+      </span>
+    </div>
+
+    <!-- ✅ Timer bar — shrinks as whole-test time runs out -->
+    <div style="background:#f0f0f0; border-radius:4px; height:8px; margin-bottom:8px;">
+      <div [style.width.%]="timePercent"
+           [style.background]="timeLeft < 60 ? '#ff4d4f' : '#1890ff'"
+           style="height:8px; border-radius:4px; transition:width 1s linear;">
+      </div>
+    </div>
+
+    <!-- Question progress bar -->
+    <div style="background:#f0f0f0; border-radius:4px; height:4px; margin-bottom:24px;">
+      <div [style.width.%]="((currentIndex + 1) / questions.length) * 100"
+           style="background:#52c41a; height:4px; border-radius:4px; transition:width 0.3s;">
+      </div>
+    </div>
+
+    <!-- Question -->
+    <h3>{{ currentQuestion?.questionText }}</h3>
+
+    <!-- Options -->
+    <div *ngFor="let option of currentQuestion?.options"
+      (click)="selectOption(currentQuestion!.id, option.id)"
+      [style.background]="selectedAnswers[currentQuestion!.id] === option.id ? '#e6f7ff' : '#fff'"
+      [style.border]="selectedAnswers[currentQuestion!.id] === option.id ? '2px solid #1890ff' : '1px solid #d9d9d9'"
+      style="padding:12px 16px; margin-bottom:10px; border-radius:6px; cursor:pointer;">
+      {{ option.optionText }}
+    </div>
+
+    <!-- Next / Submit -->
+    <button (click)="nextQuestion()"
+      style="margin-top:16px; background:#1890ff; color:white; border:none;
+             padding:10px 24px; border-radius:4px; cursor:pointer; font-size:16px;">
+      {{ currentIndex === questions.length - 1 ? 'Submit Test' : 'Next Question' }}
+    </button>
+
+  </div>
+
+</div>

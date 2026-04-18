@@ -1,0 +1,65 @@
+<div style="max-width: 600px; margin: 40px auto; font-family: Arial;">
+
+  <h2>Add New Question</h2>
+
+  <!-- Success / Error -->
+  <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+  <!-- 🔽 Select Test Dropdown -->
+  <div style="margin-bottom: 16px;">
+    <label><strong>Select Test</strong></label><br/>
+    <select [(ngModel)]="selectedTestId" (change)="onTestSelect()"
+      style="width:100%; padding:8px; margin-top:4px;">
+      <option value="0" disabled>-- Select a Test --</option>
+      <option *ngFor="let test of tests" [value]="test.id">
+        {{ test.id }} — {{ test.title }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Question Text -->
+  <div style="margin-bottom: 16px;">
+    <label>Question Text</label><br/>
+    <textarea [(ngModel)]="question.questionText" rows="3"
+      style="width:100%; padding:8px; margin-top:4px;">
+    </textarea>
+  </div>
+
+  <!-- Options -->
+  <h4>Options</h4>
+  <div *ngFor="let option of question.options; let i = index"
+    style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+
+    <input type="text" [(ngModel)]="option.optionText"
+      placeholder="Option {{ i + 1 }}"
+      style="flex:1; padding:8px;" />
+
+    <label>
+      <input type="checkbox" [(ngModel)]="option.isCorrect" />
+      Correct
+    </label>
+
+    <button (click)="removeOption(i)"
+      style="background:red; color:white; border:none; padding:6px 10px; cursor:pointer;">
+      ✕
+    </button>
+  </div>
+
+  <!-- Add Option -->
+  <button (click)="addOption()"
+    style="margin-bottom:16px; padding:8px 16px; cursor:pointer;">
+    + Add Option
+  </button>
+
+  <br/>
+
+  <!-- Submit -->
+ <!-- Replace your submit button with this -->
+<button type="button" 
+  (click)="submitQuestion()"
+  style="background:green; color:white; padding:10px 24px; border:none; cursor:pointer; font-size:16px;">
+  Submit Question
+</button>
+
+</div>

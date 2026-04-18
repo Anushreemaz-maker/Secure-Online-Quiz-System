@@ -1,0 +1,42 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.form-container {
+  width: 700px;
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+nz-form-item {
+  margin-bottom: 20px;
+}
+
+input[nz-input],
+textarea[nz-input] {
+  height: 40px;
+  border-radius: 4px;
+}
+
+textarea[nz-input] {
+  height: auto;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  button {
+    width: 200px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+}
